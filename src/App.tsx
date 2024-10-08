@@ -132,11 +132,12 @@ function App() {
   const copWidth = 40; // Width of the cop car
   const proximityBuffer = 100; // Increase proximity range
 
+  const loadHighscores = async () => {
+    const scores = await getHighScores();
+    setHighscores(scores);
+  };
+
   useEffect(() => {
-    const loadHighscores = async () => {
-      const scores = await getHighScores();
-      setHighscores(scores);
-    };
     loadHighscores();
   }, []);
 
@@ -277,7 +278,10 @@ function App() {
 
   // Submit score to the server
   const submitScore = useCallback(async () => {
-    if (scoreRef.current > 0) submitHighScore(user, scoreRef.current);
+    if (scoreRef.current > 0) {
+      await submitHighScore(user, scoreRef.current);
+      await loadHighscores();
+    }
   }, [user]);
 
   const playCrashSound = () => {
@@ -686,12 +690,15 @@ function App() {
                 ))}
             </ol>
           ) : (
-            <p>No high scores yet!</p>
+            <p></p>
           )}
         </div>
         {/* Song Toggle Button */}
         <div className="absolute right-[300px] top-4 z-20 flex items-center space-x-2">
-          <ArrowPathIcon className="size-4 text-white" />
+          <ArrowPathIcon
+            className="size-4 cursor-pointer text-white"
+            onClick={toggleSong}
+          />
           <span className="text-white">
             {selectedSong === "backgroundMusic"
               ? "Wonkey Donkey"

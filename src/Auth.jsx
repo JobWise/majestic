@@ -11,11 +11,13 @@ import { MAJESTIC_BUCKET } from "./constants";
 
 function Auth() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
+      setLoading(false);
     });
 
     // Cleanup subscription on unmount
@@ -49,7 +51,7 @@ function Auth() {
       });
   };
 
-  if (user) return null;
+  if (user || loading) return null;
   return (
     <div className="h-full w-screen overflow-hidden bg-gray-100">
       <div className="h-full w-full" tabIndex={0}>
