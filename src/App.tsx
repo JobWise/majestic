@@ -145,6 +145,7 @@ function App() {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
+      loadHighscores();
     });
 
     return () => unsubscribe();
