@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
 import { ArrowPathIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 import Background from "./components/background";
 import Obstacles from "./components/obstacles";
@@ -18,6 +20,8 @@ import {
   ROAD_STRIPE_ANIMATION_DURATION,
 } from "./constants";
 import useAudio from "./hooks/useAudio";
+import { getHighScores, submitHighScore } from "./firebase";
+import Auth from "./Auth";
 
 const powerupTypes = [
   {
@@ -30,7 +34,9 @@ const powerupTypes = [
 ];
 
 function App() {
-  const highscores = [];
+  const [user, setUser] = useState(null);
+
+  const [highscores, setHighscores] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [score, setScore] = useState(0);
   const gameRef = useRef(null);
@@ -125,6 +131,23 @@ function App() {
   const copPosition = 8; // Example position of the cop car
   const copWidth = 40; // Width of the cop car
   const proximityBuffer = 100; // Increase proximity range
+
+  useEffect(() => {
+    const loadHighscores = async () => {
+      const scores = await getHighScores();
+      setHighscores(scores);
+    };
+    loadHighscores();
+  }, []);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -254,15 +277,8 @@ function App() {
 
   // Submit score to the server
   const submitScore = useCallback(async () => {
-    //if (scoreRef.current > 0) {
-    //fetcher.submit(
-    //{ score: scoreRef.current },
-    //{
-    //action: `/admin/majestic`,
-    //}
-    //);
-    //}
-  }, []);
+    if (scoreRef.current > 0) submitHighScore(user, scoreRef.current);
+  }, [user]);
 
   const playCrashSound = () => {
     const crashAudio = new Audio(`${MAJESTIC_BUCKET}/crash-game-C2N_JUJ-.mp3`);
@@ -599,6 +615,8 @@ function App() {
     return () => clearInterval(checkProximityToCop);
   }, [isRunning, health, submitScore]);
 
+  if (!user) return <Auth />;
+
   return (
     <div className="h-full w-screen overflow-hidden bg-gray-100">
       <div
@@ -662,8 +680,8 @@ function App() {
                 .sort((a, b) => b.score - a.score) // Sort descending by score
                 .slice(0, 5) // Display top 5 highscores
                 .map((hs) => (
-                  <li key={hs.userId}>
-                    {hs.firstName} {hs.lastName}: {hs.score}
+                  <li key={hs.email}>
+                    {hs.displayName}: {hs.score}
                   </li>
                 ))}
             </ol>
