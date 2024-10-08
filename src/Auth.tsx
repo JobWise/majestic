@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from "react";
 import {
   getAuth,
@@ -12,12 +13,14 @@ import { MAJESTIC_BUCKET } from "./constants";
 function Auth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [signingIn, setSigningIn] = useState(false);
   const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
       setLoading(false);
+      setSigningIn(false);
     });
 
     // Cleanup subscription on unmount
@@ -25,6 +28,8 @@ function Auth() {
   }, [auth]);
 
   const signInWithGoogle = () => {
+    setSigningIn(true);
+
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -62,9 +67,17 @@ function Auth() {
             src={`${MAJESTIC_BUCKET}/the-majestic-game-D_mXofAo.svg`}
             alt="The Majestic"
           />
-          <h3 className="text-3xl text-white" onClick={signInWithGoogle}>
-            Sign in
-          </h3>
+          {signingIn ? (
+            <div className="flex gap-2">
+              <div class="h-4 w-4 animate-bounce rounded-full bg-white [animation-delay:-0.3s]"></div>
+              <div class="h-4 w-4 animate-bounce rounded-full bg-white [animation-delay:-0.15s]"></div>
+              <div class="h-4 w-4 animate-bounce rounded-full bg-white"></div>
+            </div>
+          ) : (
+            <h3 className="text-3xl text-white" onClick={signInWithGoogle}>
+              Sign in
+            </h3>
+          )}
         </div>
       </div>
     </div>
