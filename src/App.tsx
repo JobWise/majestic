@@ -51,28 +51,28 @@ function App() {
   const animationFrameId = useRef(null);
   const lastTimeRef = useRef(Date.now());
   const backgroundAudio = useAudio(
-    `${MAJESTIC_BUCKET}/wonky-donkey.mp3`,
+    `${MAJESTIC_BUCKET}/audio/wonky-donkey.mp3`,
     {
       loop: true,
       volume: 0.5,
     }
   );
-  const jobwiseAudio = useAudio(
-    `${MAJESTIC_BUCKET}/jobwise-city.mp3`,
-    { loop: true, volume: 0.5 }
-  );
-  const sirenAudio = useAudio(
-    `${MAJESTIC_BUCKET}/police-siren.mp3`,
-    { loop: false, volume: 0.5 }
-  );
-  const carAudio = useAudio(`${MAJESTIC_BUCKET}/car-go.mp3`, {
+  const jobwiseAudio = useAudio(`${MAJESTIC_BUCKET}/audio/jobwise-city.mp3`, {
+    loop: true,
+    volume: 0.5,
+  });
+  const sirenAudio = useAudio(`${MAJESTIC_BUCKET}/audio/police-siren.mp3`, {
+    loop: false,
+    volume: 0.5,
+  });
+  const carAudio = useAudio(`${MAJESTIC_BUCKET}/audio/car-go.mp3`, {
     loop: true,
     volume: 0.1,
   });
-  const powerUpAudio = useAudio(
-    `${MAJESTIC_BUCKET}/power-up.mp3`,
-    { loop: false, volume: 0.4 }
-  );
+  const powerUpAudio = useAudio(`${MAJESTIC_BUCKET}/audio/power-up.mp3`, {
+    loop: false,
+    volume: 0.4,
+  });
 
   // State variable for selected song
   const [selectedSong, setSelectedSong] = useState("jobwise");
@@ -89,7 +89,7 @@ function App() {
 
   // const isHornPlaying = useRef(false);
   // const lastHornPlayTime = useRef(0);
-  const hornAudio = useAudio(`${MAJESTIC_BUCKET}/yeehaw.mp3`, {
+  const hornAudio = useAudio(`${MAJESTIC_BUCKET}/audio/yeehaw.mp3`, {
     loop: false,
     volume: 0.7,
   });
@@ -184,7 +184,7 @@ function App() {
       `${MAJESTIC_BUCKET}/chipotle.svg`,
       `${MAJESTIC_BUCKET}/cop.png`,
       `${MAJESTIC_BUCKET}/cyclist.png`,
-      `${MAJESTIC_BUCKET}/the-majestic-title.svg`,
+      `${MAJESTIC_BUCKET}/majestic-title.svg`,
       `${MAJESTIC_BUCKET}/majestic.png`,
       // Preload images from carTypes
       ...carTypes.map((car) => car.src),
@@ -286,7 +286,7 @@ function App() {
   }, [user]);
 
   const playCrashSound = () => {
-    const crashAudio = new Audio(`${MAJESTIC_BUCKET}/crash.mp3`);
+    const crashAudio = new Audio(`${MAJESTIC_BUCKET}/audio/crash.mp3`);
     crashAudio.volume = 0.4;
     crashAudio.play();
   };
@@ -309,8 +309,7 @@ function App() {
         width: obs.width,
         height: obs.height,
       };
-      const isBicycle =
-        obs.type.src === `${MAJESTIC_BUCKET}/cyclist.png`;
+      const isBicycle = obs.type.src === `${MAJESTIC_BUCKET}/cyclist.png`;
       const collisionBuffer = isBicycle ? 5 : 0;
 
       if (
@@ -779,7 +778,7 @@ function App() {
             className="group absolute inset-0 z-30 flex flex-col items-center justify-center bg-gray-800 bg-opacity-70 hover:cursor-pointer"
           >
             <img
-              src={`${MAJESTIC_BUCKET}/the-majestic-title.svg`}
+              src={`${MAJESTIC_BUCKET}/majestic-title.svg`}
               alt="The Majestic"
             />
             {scoreRef.current > 0 && (

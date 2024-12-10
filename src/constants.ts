@@ -1,5 +1,4 @@
-export const MAJESTIC_BUCKET =
-  "https://fly.storage.tigris.dev/majestic-assets";
+export const MAJESTIC_BUCKET = "https://fly.storage.tigris.dev/majestic-assets";
 
 export const messagesList = [
   { type: "text", content: "Bing Bong - Jax" },
