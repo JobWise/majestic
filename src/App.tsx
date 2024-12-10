@@ -25,7 +25,7 @@ import Auth from "./Auth";
 
 const powerupTypes = [
   {
-    src: `${MAJESTIC_BUCKET}/power-up-DGo3gCqb.svg`,
+    src: `${MAJESTIC_BUCKET}/power-up.svg`,
     width: 30,
     height: 30,
     speed: 7, // Speed at which the power-up moves
@@ -51,26 +51,26 @@ function App() {
   const animationFrameId = useRef(null);
   const lastTimeRef = useRef(Date.now());
   const backgroundAudio = useAudio(
-    `${MAJESTIC_BUCKET}/background-music-game-BRycRIR-.mp3`,
+    `${MAJESTIC_BUCKET}/wonky-donkey.mp3`,
     {
       loop: true,
       volume: 0.5,
     }
   );
   const jobwiseAudio = useAudio(
-    `${MAJESTIC_BUCKET}/jobwise_city-CSgEQ8as.mp3`,
+    `${MAJESTIC_BUCKET}/jobwise-city.mp3`,
     { loop: true, volume: 0.5 }
   );
   const sirenAudio = useAudio(
-    `${MAJESTIC_BUCKET}/police-siren-game-B1XSz0BQ.mp3`,
+    `${MAJESTIC_BUCKET}/police-siren.mp3`,
     { loop: false, volume: 0.5 }
   );
-  const carAudio = useAudio(`${MAJESTIC_BUCKET}/car-go-game-CDMZBSGh.mp3`, {
+  const carAudio = useAudio(`${MAJESTIC_BUCKET}/car-go.mp3`, {
     loop: true,
     volume: 0.1,
   });
   const powerUpAudio = useAudio(
-    `${MAJESTIC_BUCKET}/power-up-game-DXx5e65g.mp3`,
+    `${MAJESTIC_BUCKET}/power-up.mp3`,
     { loop: false, volume: 0.4 }
   );
 
@@ -89,7 +89,7 @@ function App() {
 
   // const isHornPlaying = useRef(false);
   // const lastHornPlayTime = useRef(0);
-  const hornAudio = useAudio(`${MAJESTIC_BUCKET}/yeehaw-game-BrswINW8.mp3`, {
+  const hornAudio = useAudio(`${MAJESTIC_BUCKET}/yeehaw.mp3`, {
     loop: false,
     volume: 0.7,
   });
@@ -181,11 +181,11 @@ function App() {
 
   useEffect(() => {
     const imagesToPreload = [
-      `${MAJESTIC_BUCKET}/chipotle-game-D31WZczL.svg`,
-      `${MAJESTIC_BUCKET}/cop-game-mdVbxfeD.png`,
-      `${MAJESTIC_BUCKET}/cyclist-game-B-76_0bM.png`,
-      `${MAJESTIC_BUCKET}/the-majestic-game-D_mXofAo.svg`,
-      `${MAJESTIC_BUCKET}/majestic-game-DSlk7pvK.png`,
+      `${MAJESTIC_BUCKET}/chipotle.svg`,
+      `${MAJESTIC_BUCKET}/cop.png`,
+      `${MAJESTIC_BUCKET}/cyclist.png`,
+      `${MAJESTIC_BUCKET}/the-majestic-title.svg`,
+      `${MAJESTIC_BUCKET}/majestic.png`,
       // Preload images from carTypes
       ...carTypes.map((car) => car.src),
       // Add any other images you use
@@ -286,7 +286,7 @@ function App() {
   }, [user]);
 
   const playCrashSound = () => {
-    const crashAudio = new Audio(`${MAJESTIC_BUCKET}/crash-game-C2N_JUJ-.mp3`);
+    const crashAudio = new Audio(`${MAJESTIC_BUCKET}/crash.mp3`);
     crashAudio.volume = 0.4;
     crashAudio.play();
   };
@@ -310,7 +310,7 @@ function App() {
         height: obs.height,
       };
       const isBicycle =
-        obs.type.src === `${MAJESTIC_BUCKET}/cyclist-game-B-76_0bM.png`;
+        obs.type.src === `${MAJESTIC_BUCKET}/cyclist.png`;
       const collisionBuffer = isBicycle ? 5 : 0;
 
       if (
@@ -713,7 +713,7 @@ function App() {
             <img
               key={index}
               style={{ width: "30px", height: "30px" }}
-              src={`${MAJESTIC_BUCKET}/power-up-DGo3gCqb.svg`}
+              src={`${MAJESTIC_BUCKET}/power-up.svg`}
               alt="Double Jump Power-up"
             />
           ))}
@@ -746,7 +746,7 @@ function App() {
           </div>
 
           <img
-            src={`${MAJESTIC_BUCKET}/majestic-game-DSlk7pvK.png`}
+            src={`${MAJESTIC_BUCKET}/majestic.png`}
             alt="RV"
             style={{
               width: "100%",
@@ -759,12 +759,12 @@ function App() {
         <img
           alt="required"
           className="absolute bottom-[40px] left-[500px] h-[70px]"
-          src={`${MAJESTIC_BUCKET}/chipotle-game-D31WZczL.svg`}
+          src={`${MAJESTIC_BUCKET}/chipotle.svg`}
         />
         <img
           alt="required"
           className="absolute bottom-[8px] left-[8px] z-10 h-[40px]"
-          src={`${MAJESTIC_BUCKET}/cop-game-mdVbxfeD.png`}
+          src={`${MAJESTIC_BUCKET}/cop.png`}
         />
         {/* Siren Overlay */}
         <div className="absolute bottom-[40px] left-[30px] z-10">
@@ -779,7 +779,7 @@ function App() {
             className="group absolute inset-0 z-30 flex flex-col items-center justify-center bg-gray-800 bg-opacity-70 hover:cursor-pointer"
           >
             <img
-              src={`${MAJESTIC_BUCKET}/the-majestic-game-D_mXofAo.svg`}
+              src={`${MAJESTIC_BUCKET}/the-majestic-title.svg`}
               alt="The Majestic"
             />
             {scoreRef.current > 0 && (

@@ -64,7 +64,7 @@ function Auth() {
         <Background timeOfDay={"day"} />
         <div className="group absolute inset-0 z-30 flex flex-col items-center justify-center bg-gray-800 bg-opacity-70 hover:cursor-pointer">
           <img
-            src={`${MAJESTIC_BUCKET}/the-majestic-game-D_mXofAo.svg`}
+            src={`${MAJESTIC_BUCKET}/the-majestic-title.svg`}
             alt="The Majestic"
           />
           {signingIn ? (
