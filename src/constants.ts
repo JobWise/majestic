@@ -1,5 +1,5 @@
 export const MAJESTIC_BUCKET =
-  "https://jobwise-prd-public-uploads.s3.us-west-1.amazonaws.com/majestic";
+  "https://fly.storage.tigris.dev/majestic-assets";
 
 export const messagesList = [
   { type: "text", content: "Bing Bong - Jax" },
@@ -13,8 +13,8 @@ export const messagesList = [
   { type: "text", content: "That hits - Eric" },
   { type: "text", content: "Today’s a swearing day - Ben" },
   { type: "text", content: "Elbow Windows - ChatGPT" },
-  { type: "image", content: `${MAJESTIC_BUCKET}/sad-cat-Bmicz3N9.gif` },
-  { type: "image", content: `${MAJESTIC_BUCKET}/tami-D6bwDk4A.jpg` },
+  { type: "image", content: `${MAJESTIC_BUCKET}/sad-cat.gif` },
+  { type: "image", content: `${MAJESTIC_BUCKET}/tami.jpg` },
 ];
 
 // Road Stripe Constants
@@ -26,25 +26,25 @@ export const ROAD_STRIPE_ANIMATION_DURATION = 0.08;
 // Car Types
 export const carTypes = [
   {
-    src: `${MAJESTIC_BUCKET}/car-retro-game-DH35PxB4.png`,
+    src: `${MAJESTIC_BUCKET}/car-retro.png`,
     width: 80,
     height: 27,
     speed: 4,
   },
   {
-    src: `${MAJESTIC_BUCKET}/truck-game-2FfHe3xF.png`,
+    src: `${MAJESTIC_BUCKET}/truck.png`,
     width: 80,
     height: 27,
     speed: 5,
   },
   {
-    src: `${MAJESTIC_BUCKET}/tesla-game-Bt7hgpsP.png`,
+    src: `${MAJESTIC_BUCKET}/tesla.png`,
     width: 80,
     height: 27,
     speed: 2,
   },
   {
-    src: `${MAJESTIC_BUCKET}/cyclist-game-B-76_0bM.png`,
+    src: `${MAJESTIC_BUCKET}/cyclist.png`,
     width: 40,
     height: 28,
     speed: 8,
